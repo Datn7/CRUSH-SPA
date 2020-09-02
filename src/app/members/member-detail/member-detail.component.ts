@@ -24,6 +24,19 @@ export class MemberDetailComponent implements OnInit {
     });
   }
 
+  getImages() {
+    const imageUrls = [];
+    for (const photo of this.detailUser.photos) {
+      imageUrls.push({
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url,
+        description: photo.description,
+      });
+    }
+    return imageUrls;
+  }
+
   loadUser() {
     this._userService.getUser(+this._route.snapshot.params['id']).subscribe(
       (user: User) => {

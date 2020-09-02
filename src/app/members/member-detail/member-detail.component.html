@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img
+          src="{{ detailUser?.photoUrl }}"
+          alt="{{ detailUser?.knownAs }}"
+          class="card-img-top img-thumbnail"
+        />
+        <div class="card-body">
+          <div>
+            <strong>ადგილმდებარეობა:</strong>
+            <p>{{ detailUser?.city }}, {{ detailUser?.country }}</p>
+          </div>
+          <div>
+            <strong>ასაკი: </strong>
+            <p>{{ detailUser?.age }}</p>
+          </div>
+          <div>
+            <strong>ბოლოს აქტიური: </strong>
+            <p>{{ detailUser?.lastActive }}</p>
+          </div>
+          <div>
+            <strong>რეგისტრაციის დრო: </strong>
+            <p>{{ detailUser?.created }}</p>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group d-flex">
+              <button class="btn btn-primary w-100">მოწონება</button>
+              <button class="btn btn-success w-100">მიწერა</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="{{ detailUser?.knownAs }}-ს შესახებ">
+            <h4>აღწერა</h4>
+            <p>{{ detailUser?.introduction }}</p>
+            <h4>ეძებს:</h4>
+            <p>{{ detailUser?.lookingFor }}</p>
+          </tab>
+          <tab heading="ინტერესები">
+            <h4>ინტერესები</h4>
+            <p>{{ detailUser?.interests }}</p>
+          </tab>
+          <tab heading="ფოტოები">
+            <carousel [isAnimated]="true">
+              <slide>
+                <img
+                  src="https://www.freedigitalphotos.net/images/img/homepage/394230.jpg"
+                  alt="first slide"
+                  style="display: block; width: 100%;"
+                />
+              </slide>
+              <slide>
+                <img
+                  src="https://killerattitudestatus.in/wp-content/uploads/2019/12/gud-night-images.jpg"
+                  alt="second slide"
+                  style="display: block; width: 100%;"
+                />
+              </slide>
+              <slide>
+                <img
+                  src="https://static.toiimg.com/photo/72975551.cms"
+                  alt="third slide"
+                  style="display: block; width: 100%;"
+                />
+              </slide>
+            </carousel>
+          </tab>
+          <tab heading="მესიჯები">
+            <p>მესიჯები აქ</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

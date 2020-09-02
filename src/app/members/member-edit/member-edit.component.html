@@ -1,0 +1,101 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>თქვენი პროფილი</h1>
+    </div>
+    <div class="col-sm-8">
+      <div class="alert alert-info" *ngIf="editForm.dirty">
+        <strong>ინფორმაცია:</strong> ცვლილებები გაქვთ შესანახი, გთხოვთ შეინახეთ!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img
+          src="{{ editUser.photoUrl }}"
+          alt="{{ editUser.knownAs }}"
+          class="card-img-top img-thumbnail"
+        />
+        <div class="card-body">
+          <div>
+            <strong>ადგილმდებარეობა:</strong>
+            <p>{{ editUser.city }}, {{ editUser.country }}</p>
+          </div>
+          <div>
+            <strong>ასაკი: </strong>
+            <p>{{ editUser?.age }}</p>
+          </div>
+          <div>
+            <strong>ბოლოს აქტიური: </strong>
+            <p>{{ editUser?.lastActive }}</p>
+          </div>
+          <div>
+            <strong>რეგისტრაციის დრო: </strong>
+            <p>{{ editUser?.created }}</p>
+          </div>
+          <div class="card-footer">
+            <button
+              [disabled]="!editForm.dirty"
+              class="btn btn-success btn-block"
+              form="editForm"
+            >
+              შენახვა
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="პროფილის შეცვლა">
+            <form #editForm="ngForm" (ngSubmit)="updateUser()" id="editForm">
+              <h4>აღწერა</h4>
+              <textarea
+                name="introduction"
+                rows="6"
+                class="form-control"
+                [(ngModel)]="editUser.introduction"
+              ></textarea>
+              <h4>ეძებს:</h4>
+              <textarea
+                name="lookingFor"
+                rows="6"
+                class="form-control"
+                [(ngModel)]="editUser.lookingFor"
+              ></textarea>
+              <h4>ინტერესები:</h4>
+              <textarea
+                name="interests"
+                rows="6"
+                class="form-control"
+                [(ngModel)]="editUser.interests"
+              ></textarea>
+              <h4>ადგილმდებარეობის დეტალები:</h4>
+              <div class="form-inline">
+                <label for="city">ქალაქი</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="city"
+                  [(ngModel)]="editUser.city"
+                />
+                <label for="city">ქვეყანა</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="country"
+                  [(ngModel)]="editUser.country"
+                />
+              </div>
+            </form>
+          </tab>
+          <tab heading="ფოტოს შეცვლა">
+            <p>ფოტოს შეცვლა აქ</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

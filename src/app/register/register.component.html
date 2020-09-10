@@ -1,18 +1,68 @@
-<form #registerForm="ngForm" (ngSubmit)="register()">
+<form [formGroup]="registerForm" (ngSubmit)="register()">
     <h2 class="text-center text-primary">რეგისტრაცია</h2>
     <hr>
 
+
+ <div class="form-group">
+    <label class="control-label" style="margin-right:10px">მე ვარ: </label>
+    <label class="radio-inline">
+      <input class="mr-3" type="radio" value="male" formControlName="gender">კაცი
+    </label>
+    <label class="radio-inline ml-3">
+      <input class="mr-3" type="radio" value="female" formControlName="gender">ქალი
+    </label>
+  </div>
+
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="მომხმარებელი" required name="username" [(ngModel)]="modelRegister.username">
+        <input type="text" class="form-control" placeholder="მომხმარებელი"  formControlName="username" 
+        [ngClass]="{'is-invalid':registerForm.get('username').errors && registerForm.get('username').touched}" >
+        <div class="invalid-feedback">აირჩიეთ მომხმარებელი</div>
     </div>
 
     <div class="form-group">
-        <input type="password" class="form-control" placeholder="პაროლი" required name="password" [(ngModel)]="modelRegister.password">
+        <input [ngClass]="{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}" class="form-control"
+          placeholder="ცნობილი როგორც" formControlName="knownAs">
+        <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">ცნობილი როგორც აუცილებელია</div>
+      </div>
+    
+      <div class="form-group">
+        <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}" class="form-control"
+          placeholder="დაბადების თარიღი" formControlName="dateOfBirth" type="text"  bsDatepicker>
+        <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">დაბადების თარიღი აუცილებელია</div>
+      </div>
+
+      <div class="form-group">
+        <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}" class="form-control"
+          placeholder="ქალაქი" formControlName="city">
+        <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">ქალაქი აუცილებელია</div>
+      </div>
+    
+      <div class="form-group">
+        <input [ngClass]="{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}" class="form-control"
+          placeholder="ქვეყანა" formControlName="country">
+        <div class="invalid-feedback" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">ქვეყანა აუცილებელია</div>
+      </div>
+
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="პაროლი"  formControlName="password"
+        [ngClass]="{'is-invalid':registerForm.get('password').errors && registerForm.get('password').touched}" >
+        <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">აირჩიეთ პაროლი</div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">პაროლს 4 ასო მაინც უნდა ჰქონდეს</div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">პაროლი მაქსიმუმ 8 ასო</div>
     </div>
 
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="გაიმეორეთ პაროლი"  formControlName="confirmPassword"
+        [ngClass]="{'is-invalid':registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched || registerForm.hasError('mismatch')}">
+        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">აირჩიეთ პაროლი</div>
+        <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched">პაროლი არ ემთხვევა</div>
+    </div>
+
+    <p>Form Value: {{registerForm.value | json}}</p>
+    <p>Form Status: {{registerForm.status | json}}</p>
 
     <div class="form-group text-center">
-        <button class="btn btn-success" type="submit">რეგისტაცია</button>
+        <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid">რეგისტაცია</button>
         <button class="btn btn-default" type="button" >უკან</button>
     </div>
 

@@ -16,6 +16,7 @@
 
     <!--Conditional renders-->
     <div *ngIf="loggedIn()" class="dropdown show" dropdown>
+      
       <a class="dropdown-toggle text-light" dropdownToggle>
         გამარჯობა {{ _authService.decodedToken?.unique_name | titlecase }}
       </a>

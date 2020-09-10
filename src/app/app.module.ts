@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -30,49 +30,47 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 export function tokenGetter() {
-  return localStorage.getItem('token');
+	return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HomeComponent,
-    RegisterComponent,
-    MemberListComponent,
-    ListsComponent,
-    MessagesComponent,
-    MemberCardComponent,
-    MemberDetailComponent,
-    MemberEditComponent,
-    PhotoEditorComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    BsDropdownModule.forRoot(),
-    FileUploadModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:5000'],
-        disallowedRoutes: ['localhost:5000/api/auth'],
-      },
-    }),
-    TabsModule.forRoot(),
-    CarouselModule.forRoot(),
-  ],
-  providers: [
-    MemberDetailResolver,
-    MemberListResolver,
-    MemberEditResolver,
-    PreventUnsavedChangesGuard,
-  ],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		NavComponent,
+		HomeComponent,
+		RegisterComponent,
+		MemberListComponent,
+		ListsComponent,
+		MessagesComponent,
+		MemberCardComponent,
+		MemberDetailComponent,
+		MemberEditComponent,
+		PhotoEditorComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule,
+		BsDropdownModule.forRoot(),
+		FileUploadModule,
+		BsDatepickerModule.forRoot(),
+		JwtModule.forRoot({
+			config: {
+				tokenGetter: tokenGetter,
+				allowedDomains: [ 'localhost:5000' ],
+				disallowedRoutes: [ 'localhost:5000/api/auth' ]
+			}
+		}),
+		TabsModule.forRoot(),
+		CarouselModule.forRoot()
+	],
+	providers: [ MemberDetailResolver, MemberListResolver, MemberEditResolver, PreventUnsavedChangesGuard ],
+	bootstrap: [ AppComponent ]
 })
 export class AppModule {}

@@ -8,19 +8,18 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class MemberListResolver implements Resolve<User[]> {
-  constructor(
-    private _userService: UserService,
-    private _router: Router,
-    private _alertify: AlertifyService
-  ) {}
+	pageNumber = 1;
+	pageSize = 5;
 
-  resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-    return this._userService.getUsers().pipe(
-      catchError((error) => {
-        this._alertify.error('ინფორმაცია ვერ მოდის');
-        this._router.navigate(['']);
-        return of(null);
-      })
-    );
-  }
+	constructor(private _userService: UserService, private _router: Router, private _alertify: AlertifyService) {}
+
+	resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
+		return this._userService.getUsers(this.pageNumber, this.pageSize).pipe(
+			catchError((error) => {
+				this._alertify.error('ინფორმაცია ვერ მოდის');
+				this._router.navigate([ '' ]);
+				return of(null);
+			})
+		);
+	}
 }

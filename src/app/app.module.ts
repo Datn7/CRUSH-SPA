@@ -34,48 +34,55 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 export function tokenGetter() {
-	return localStorage.getItem('token');
+  return localStorage.getItem('token');
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		NavComponent,
-		HomeComponent,
-		RegisterComponent,
-		MemberListComponent,
-		ListsComponent,
-		MessagesComponent,
-		MemberCardComponent,
-		MemberDetailComponent,
-		MemberEditComponent,
-		PhotoEditorComponent
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		BrowserAnimationsModule,
-		HttpClientModule,
-		FormsModule,
-		ReactiveFormsModule,
-		BsDropdownModule.forRoot(),
-		FileUploadModule,
-		BsDatepickerModule.forRoot(),
-		PaginationModule.forRoot(),
-		ButtonsModule.forRoot(),
-		JwtModule.forRoot({
-			config: {
-				tokenGetter: tokenGetter,
-				allowedDomains: [ 'localhost:5000' ],
-				disallowedRoutes: [ 'localhost:5000/api/auth' ]
-			}
-		}),
-		TabsModule.forRoot(),
-		CarouselModule.forRoot()
-	],
-	providers: [ MemberDetailResolver, MemberListResolver, MemberEditResolver, PreventUnsavedChangesGuard ],
-	bootstrap: [ AppComponent ]
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    MemberListComponent,
+    ListsComponent,
+    MessagesComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    PhotoEditorComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    FileUploadModule,
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: ['localhost:5000/api/auth'],
+      },
+    }),
+    TabsModule.forRoot(),
+    CarouselModule.forRoot(),
+  ],
+  providers: [
+    MemberDetailResolver,
+    MemberListResolver,
+    MemberEditResolver,
+    PreventUnsavedChangesGuard,
+    ListsResolver,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
